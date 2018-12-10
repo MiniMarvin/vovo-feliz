@@ -18,7 +18,7 @@ const cloud = new KNoTCloud(
   'knot-test.cesar.org.br',
   80,
   'f10eb36f-ddb9-463f-aa2e-0c2cf4830000',
-  'da55ab6af6803ab3673f8730caacfb98a425593d',
+  'da55ab6af6803ab3673f8730caacfb98a425593d'
 );
 
 function listenDeviceStatus(id) {
@@ -49,6 +49,8 @@ function listenDeviceStatus(id) {
         }
       });
     }
+
+    
   }, 500); // listen the server at every 100 milliseconds
 }
 
@@ -59,8 +61,10 @@ async function main() {
   devices.forEach( (device) => {
     console.log(device.name);
     let id = device.id;
-
-    listenDeviceStatus(id);
+    // if (id === "76722a2b3dfb7813"){
+      listenDeviceStatus(id);
+      // 15CB10A6722F5CB1
+    // }
   });
 
   // use the ids here
@@ -82,9 +86,19 @@ app.get('/status', function(req, res) {
 });
 
 app.get('/', function(req, res){
-  console.log("request received");
-  res.send("server working!!!");
+    if (!shouldActivate){
+        res.sendFile(__dirname+'/home.html');
+    }
+    else{
+      res.sendFile(__dirname+'/home_alert.html');
+    }
 });
 
+app.get('/dispensar', function(req, res){
+    console.log("dispensar");
+    shouldActivate = false;
+    res.sendFile(__dirname+'/home.html');
+});
+    
 // app.set('port', process.env.PORT || 3000);
-app.listen(3000);
+app.listen(process.env.PORT);
