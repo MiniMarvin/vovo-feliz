@@ -7,8 +7,18 @@ let knotCredentials = {
   knot02: {
     uuid: 'f10eb36f-ddb9-463f-aa2e-0c2cf4830000',
     token: 'da55ab6af6803ab3673f8730caacfb98a425593d'
+  },
+  knot04: {
+    uuid: 'd3531e89-fb74-43cd-88a4-5eae81460000',
+    token: '28d1cf43fe2299381cbeee6f734fef5596e61db7'
+  },
+  knot07: {
+    uuid: '7b589c31-8999-48c2-b85a-a1f09ae80000',
+    token: '7e3cb79bc7ba3e7953fdb222c9490f2aaa667188'
   }
 }
+
+
 
 // r.json()['status']
 
@@ -17,8 +27,8 @@ const KNoTCloud = require('knot-cloud');
 const cloud = new KNoTCloud(
   'knot-test.cesar.org.br',
   80,
-  'f10eb36f-ddb9-463f-aa2e-0c2cf4830000',
-  'da55ab6af6803ab3673f8730caacfb98a425593d'
+  knotCredentials.knot04.uuid,
+  knotCredentials.knot04.token
 );
 
 function listenDeviceStatus(id) {
@@ -61,9 +71,8 @@ async function main() {
   devices.forEach( (device) => {
     console.log(device.name);
     let id = device.id;
-    // if (id === "76722a2b3dfb7813"){
+    // if (id === "0C1945EA41F71118"){
       listenDeviceStatus(id);
-      // 15CB10A6722F5CB1
     // }
   });
 
